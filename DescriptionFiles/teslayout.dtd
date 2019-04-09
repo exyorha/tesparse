@@ -1,0 +1,60 @@
+<!ELEMENT Layout (RecordOrder,Types)>
+
+<!ELEMENT RecordOrder (Header)>
+
+<!ELEMENT Types (Struct|Record)*>
+
+<!ELEMENT Header EMPTY>
+<!ATTLIST Header
+  Name CDATA #REQUIRED>
+
+<!ELEMENT Struct (Field)*>
+<!ATTLIST Struct
+    Name CDATA #REQUIRED
+>
+
+<!ELEMENT Record (Subrecord|SubrecordArray)*>
+<!ATTLIST Record
+    FourCC CDATA #REQUIRED
+    Name CDATA #REQUIRED
+>
+
+<!ELEMENT Field (FourCC|UInt8|UInt16|Int32|UInt32|Float|ByteArray|String|Array|StructRef)>
+<!ATTLIST Field
+  Name CDATA #REQUIRED>
+
+<!ELEMENT Array (FourCC|UInt8|UInt16|Int32|UInt32|Float|ByteArray|String|Array|StructRef)>
+<!ATTLIST Array
+   Length CDATA #IMPLIED>
+
+<!ELEMENT FourCC EMPTY>
+<!ELEMENT UInt8 EMPTY>
+<!ELEMENT UInt16 EMPTY>
+<!ELEMENT Int32 EMPTY>
+<!ELEMENT UInt32 EMPTY>
+<!ELEMENT Float EMPTY>
+
+<!ELEMENT ByteArray EMPTY>
+<!ATTLIST ByteArray
+   Length CDATA #IMPLIED>
+
+<!ELEMENT String EMPTY>
+<!ATTLIST String
+   Length CDATA #IMPLIED>
+
+<!ELEMENT Subrecord (Field)*>
+<!ATTLIST Subrecord
+  FourCC CDATA #REQUIRED
+  Presence (Required|Optional) #REQUIRED
+>
+
+<!ELEMENT SubrecordArray (Subrecord)*>
+<!ATTLIST SubrecordArray
+  Name CDATA #REQUIRED
+  Leader CDATA #REQUIRED
+>
+
+<!ELEMENT StructRef EMPTY>
+<!ATTLIST StructRef
+  Name CDATA #REQUIRED
+>

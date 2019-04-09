@@ -1,0 +1,2584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Layout SYSTEM "teslayout.dtd">
+<Layout>
+  <RecordOrder>
+    <Header Name="Header" />
+  </RecordOrder>
+
+  <Types>
+
+    <Struct Name="Record">
+      <Field Name="Name">
+        <FourCC />
+      </Field>
+      <Field Name="Size">
+        <UInt32/>
+      </Field>
+      <Field Name="Flags1">
+        <UInt32 />
+      </Field>
+      <Field Name="Flags2">
+        <UInt32 />
+      </Field>
+      <Field Name="Data">
+        <ByteArray Length="Size" />
+      </Field>
+    </Struct>
+
+    <Struct Name="Subrecord">
+      <Field Name="Name">
+        <FourCC />
+      </Field>
+      <Field Name="Size">
+        <UInt32 />
+      </Field>
+      <Field Name="Data">
+        <ByteArray Length="Size" />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindClassSkillPair">
+      <Field Name="MinorSkill">
+        <Int32 />
+      </Field>
+      <Field Name="MajorSkill">
+        <Int32 />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindSkillBonus">
+      <Field Name="Skill">
+        <Int32 />
+      </Field>
+      <Field Name="Bonus">
+        <Int32 />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindFactionRankInfo">
+      <Field Name="AttributeRequirements">
+        <Array Length="2">
+          <UInt32 />
+        </Array>
+      </Field>
+      <Field Name="SkillRequirements">
+        <Array Length="2">
+          <UInt32 />
+        </Array>
+      </Field>
+      <Field Name="FactionRequirement">
+        <UInt32 />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindCreatureAttack">
+      <Field Name="Min">
+        <Int32 />
+      </Field>
+      <Field Name="Max">
+        <Int32 />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindAIData">
+      <Field Name="Hello">
+        <UInt8 />
+      </Field>
+      <Field Name="Unknown1">
+        <UInt8 />
+      </Field>
+      <Field Name="Fight">
+        <UInt8 />
+      </Field>
+      <Field Name="Flee">
+        <UInt8 />
+      </Field>
+      <Field Name="Alarm">
+        <UInt8 />
+      </Field>
+      <Field Name="Unknown2">
+        <UInt8 />
+      </Field>
+      <Field Name="Unknown3">
+        <UInt8 />
+      </Field>
+      <Field Name="Unknown4">
+        <UInt8 />
+      </Field>
+      <Field Name="Flags">
+        <UInt32 />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindAIWanderPackage">
+      <Field Name="Distance">
+        <UInt16 />
+      </Field>
+      <Field Name="Duration">
+        <UInt8 />
+      </Field>
+      <Field Name="TimeOfDay">
+        <UInt8 />
+      </Field>
+      <Field Name="IdleChances">
+        <Array Length="9">
+          <UInt8 />
+        </Array>
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindAIFollowEscortPackage">
+      <Field Name="X">
+        <Float />
+      </Field>
+      <Field Name="Y">
+        <Float />
+      </Field>
+      <Field Name="Z">
+        <Float />
+      </Field>
+      <Field Name="Duration">
+        <UInt16 />
+      </Field>
+      <Field Name="Target">
+        <String />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindAITravelPackage">
+      <Field Name="X">
+        <Float />
+      </Field>
+      <Field Name="Y">
+        <Float />
+      </Field>
+      <Field Name="Z">
+        <Float />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindSpellEffect">
+      <Field Name="EffectID">
+        <UInt16 />
+      </Field>
+      <Field Name="SkillID">
+        <UInt8 />
+      </Field>
+      <Field Name="AttributeID">
+        <UInt8 />
+      </Field>
+      <Field Name="Range">
+        <UInt32 />
+      </Field>
+      <Field Name="Area">
+        <UInt32 />
+      </Field>
+      <Field Name="Duration">
+        <UInt32 />
+      </Field>
+      <Field Name="MagnitudeMinimum">
+        <UInt32 />
+      </Field>
+      <Field Name="MagnitudeMaximum">
+        <UInt32 />
+      </Field>
+    </Struct>
+
+    <Struct Name="MorrowindPosition">
+      <Field Name="PositionX">
+        <Float />
+      </Field>
+      <Field Name="PositionY">
+        <Float />
+      </Field>
+      <Field Name="PositionZ">
+        <Float />
+      </Field>
+      <Field Name="RotationX">
+        <Float />
+      </Field>
+      <Field Name="RotationY">
+        <Float />
+      </Field>
+      <Field Name="RotationZ">
+        <Float />
+      </Field>
+    </Struct>
+    
+    <Record FourCC="TES3" Name="Header">
+      <Subrecord FourCC="HEDR" Presence="Required">
+        <Field Name="Version">
+          <Float />
+        </Field>
+        <Field Name="Unknown">
+          <UInt32 />
+        </Field>
+        <Field Name="Author">
+          <String Length="32" />
+        </Field>
+        <Field Name="Description">
+          <String Length="256" />
+        </Field>
+      </Subrecord>
+      <SubrecordArray Name="Masters" Leader="MAST">
+        <Subrecord FourCC="MAST" Presence="Required">
+          <Field Name="MasterFile">
+            <String />
+          </Field>
+        </Subrecord>
+        <Subrecord FourCC="DATA" Presence="Required">
+          <Field Name="MasterFileSize">
+            <UInt32  />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="GMST" Name="GameSetting">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="STRV" Presence="Optional">
+        <Field Name="StringValue">
+          <String />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="INTV" Presence="Optional">
+        <Field Name="IntegerValue">
+          <Int32 />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="FLTV" Presence="Optional">
+        <Field Name="FloatValue">
+          <Float />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="GLOB" Name="GlobalVariable">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="FNAM" Presence="Required">
+        <Field Name="VariableType">
+          <String />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="FLTV" Presence="Required">
+        <Field Name="DefaultValue">
+          <Float />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="CLAS" Name="CharacterClass">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Required">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="CLDT" Presence="Required">
+        <Field Name="Attributes">
+          <Array Length="2">
+            <UInt32 />
+          </Array>
+        </Field>
+        <Field Name="Specialization">
+          <UInt32 />
+        </Field>
+        <Field Name="Skills">
+          <Array Length="5">
+            <StructRef Name="MorrowindClassSkillPair" />
+          </Array>
+        </Field>
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+        <Field Name="AutoCalcFlags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="DESC" Presence="Required">
+        <Field Name="Description">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="FACT" Name="Faction">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Required">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Ranks" Leader="RNAM">
+        <Subrecord FourCC="RNAM" Presence="Required">
+          <Field Name="RankName">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+
+      <Subrecord FourCC="FADT" Presence="Required">
+        <Field Name="Attributes">
+          <Array Length="2">
+            <Int32 />
+          </Array>
+        </Field>
+
+        <Field Name="RankInfo">
+          <Array Length="10">
+            <StructRef Name="MorrowindFactionRankInfo" />
+          </Array>
+        </Field>
+
+        <Field Name="Skills">
+          <Array Length="6">
+            <Int32 />
+          </Array>
+        </Field>
+
+        <Field Name="Unknown1">
+          <UInt32 />
+        </Field>
+
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Relations" Leader="ANAM">
+        <Subrecord FourCC="ANAM" Presence="Required">
+          <Field Name="OtherFactionName">
+            <String />
+          </Field>
+        </Subrecord>
+        <Subrecord FourCC="INTV" Presence="Required">
+          <Field Name="Reaction">
+            <Int32 />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="RACE" Name="Race">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String/>
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="FNAM" Presence="Required">
+        <Field Name="FriendlyName">
+          <String/>
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="RADT" Presence="Required">
+        <Field Name="SkillBonuses">
+          <Array Length="7">
+            <StructRef Name="MorrowindSkillBonus" />
+          </Array>
+        </Field>
+        <Field Name="Attributes">
+          <!--
+            Strength
+             Male
+             Female
+            Intelligence
+            Willpower
+            Agility
+            Speed
+            Endurance
+            Personality
+            Luck
+           -->
+          <Array Length="8 * 2">
+            <Int32 />
+          </Array>
+        </Field>
+        <Field Name="Height">
+          <Array Length="2">
+            <Float />
+          </Array>
+        </Field>
+        <Field Name="Weight">
+          <Array Length="2">
+            <Float />
+          </Array>
+        </Field>
+        <Field Name="Flags">
+          <Int32 />
+        </Field>
+      </Subrecord>
+      <SubrecordArray Leader="NPCS" Name="RacialSpells">
+        <Subrecord FourCC="NPCS" Presence="Required">
+          <Field Name="Spell">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+      
+      <Subrecord FourCC="DESC" Presence="Required">
+        <Field Name="Description">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="SOUN" Name="Sound">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String/>
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FileName">
+          <String/>
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Volume">
+          <UInt8 />
+        </Field>
+        <Field Name="MinRange">
+          <UInt8 />
+        </Field>
+        <Field Name="MaxRange">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="SKIL" Name="Skill">
+      <Subrecord FourCC="INDX" Presence="Required">
+        <Field Name="SkillID">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SKDT" Presence="Required">
+        <Field Name="Attribute">
+          <UInt32 />
+        </Field>
+        <Field Name="Specialization">
+          <UInt32 />
+        </Field>
+        <Field Name="UseValues">
+          <Array Length="4">
+            <Float />
+          </Array>
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="DESC" Presence="Required">
+        <Field Name="Description">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+
+    <Record FourCC="MGEF" Name="MagicEffect">
+      <Subrecord FourCC="INDX" Presence="Required">
+        <Field Name="MagicEffectID">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="MEDT" Presence="Required">
+        <Field Name="SpellSchool">
+          <UInt32 />
+        </Field>
+        <Field Name="BaseCost">
+          <Float />
+        </Field>
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+        <Field Name="Red">
+          <UInt32 />
+        </Field>
+        <Field Name="Blue">
+          <UInt32 />
+        </Field>
+        <Field Name="Green">
+          <UInt32 />
+        </Field>
+        <Field Name="SpeedX">
+          <Float />
+        </Field>
+        <Field Name="SizeX">
+          <Float />
+        </Field>
+        <Field Name="SizeCap">
+          <Float />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="EffectIcon">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="PTEX" Presence="Required">
+        <Field Name="ParticleTexture">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="BSND" Presence="Optional">
+        <Field Name="BoltSound">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="CSND" Presence="Optional">
+        <Field Name="CastSound">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="HSND" Presence="Optional">
+        <Field Name="HitSound">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="ASND" Presence="Optional">
+        <Field Name="AreaSound">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="CVFX" Presence="Optional">
+        <Field Name="CastingVisual">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="BVFX" Presence="Optional">
+        <Field Name="BoltVisual">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="HVFX" Presence="Optional">
+        <Field Name="HitVisual">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="AVFX" Presence="Optional">
+        <Field Name="AreaVisual">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="DESC" Presence="Required">
+        <Field Name="Description">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="SCPT" Name="Script">
+      <Subrecord FourCC="SCHD" Presence="Required">
+        <Field Name="Name">
+          <String Length="32" />
+        </Field>
+        <Field Name="NumShorts">
+          <UInt32 />
+        </Field>
+        <Field Name="NumLongs">
+          <UInt32 />
+        </Field>
+        <Field Name="NumFloats">
+          <UInt32 />
+        </Field>
+        <Field Name="ScriptDataSize">
+          <UInt32 />
+        </Field>
+        <Field Name="LocalVarSize">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="SCVR" Presence="Optional">
+        <Field Name="LocalVariables">
+          <String />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="SCDT" Presence="Required">
+        <Field Name="ScriptBytecode">
+          <ByteArray />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="SCTX" Presence="Required">
+        <Field Name="ScriptSource">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="REGN" Name="Region">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Required">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="WEAT" Presence="Required">
+        <Field Name="Clear">
+          <UInt8 />
+        </Field>
+        <Field Name="Cloudy">
+          <UInt8 />
+        </Field>
+        <Field Name="Foggy">
+          <UInt8 />
+        </Field>
+        <Field Name="Overcast">
+          <UInt8 />
+        </Field>
+        <Field Name="Rain">
+          <UInt8 />
+        </Field>
+        <Field Name="Thunder">
+          <UInt8 />
+        </Field>
+        <Field Name="Ash">
+          <UInt8 />
+        </Field>
+        <Field Name="Blight">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="BNAM" Presence="Optional">
+        <Field Name="SleepCreature">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="CNAM" Presence="Required">
+        <Field Name="MapColor">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Leader="SNAM" Name="Sounds">
+        <Subrecord FourCC="SNAM" Presence="Required">
+          <Field Name="Sound">
+            <String Length="32" />
+          </Field>
+          <Field Name="Chance">
+            <UInt8 />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="BSGN" Name="Birthsign">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Required">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="TNAM" Presence="Required">
+        <Field Name="TextureName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="DESC" Presence="Required">
+        <Field Name="Description">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Spells" Leader="NPCS">
+        <Subrecord FourCC="NPCS" Presence="Required">
+          <Field Name="SpellName">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+    
+    <Record FourCC="LTEX" Name="LandscapeTexture">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="INTV" Presence="Required">
+        <Field Name="Index">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="TextureFileName">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="STAT" Name="Static">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String/>
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String/>
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="DOOR" Name="Door">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Required">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="SNAM" Presence="Optional">
+        <Field Name="OpenSoundName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ANAM" Presence="Optional">
+        <Field Name="CloseSoundName">
+          <String />
+        </Field>
+      </Subrecord>
+
+    </Record>
+
+    <Record FourCC="MISC" Name="MiscItem">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MCDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+        <Field Name="Unknown">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ENAM" Presence="Optional">
+        <Field Name="EnchantmentName">
+          <String />
+        </Field>
+      </Subrecord>
+
+    </Record>
+
+    <Record FourCC="WEAP" Name="Weapon">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="WPDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+        <Field Name="WeaponType">
+          <UInt16 />
+        </Field>
+        <Field Name="Health">
+          <UInt16 />
+        </Field>
+        <Field Name="Speed">
+          <Float />
+        </Field>
+        <Field Name="Reach">
+          <Float />
+        </Field>
+        <Field Name="EnchantPoints">
+          <UInt16 />
+        </Field>
+        <Field Name="ChopMin">
+          <UInt8 />
+        </Field>
+        <Field Name="ChopMax">
+          <UInt8 />
+        </Field>
+        <Field Name="SlashMin">
+          <UInt8 />
+        </Field>
+        <Field Name="SlashMax">
+          <UInt8 />
+        </Field>
+        <Field Name="ThrustMin">
+          <UInt8 />
+        </Field>
+        <Field Name="ThrustMax">
+          <UInt8 />
+        </Field>
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ENAM" Presence="Optional">
+        <Field Name="EnchantmentName">
+          <String />
+        </Field>
+      </Subrecord>      
+    </Record>
+
+    <Record FourCC="CONT" Name="Container">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="CNDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FLAG" Presence="Required">
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Items" Leader="NPCO">
+        <Subrecord FourCC="NPCO" Presence="Required">
+          <Field Name="Count">
+            <Int32 />
+          </Field>
+          <Field Name="Name">
+            <String Length="32" />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="SPEL" Name="Spell">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SPDT" Presence="Required">
+        <Field Name="Type">
+          <UInt32 />
+        </Field>
+        <Field Name="Cost">
+          <UInt32 />
+        </Field>
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Effects" Leader="ENAM">
+        <Subrecord FourCC="ENAM" Presence="Required">
+          <Field Name="Effect">
+            <StructRef Name="MorrowindSpellEffect" />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="CREA" Name="Creature">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="CNAM" Presence="Optional">
+        <Field Name="SoundGenCreature">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="NPDT" Presence="Required">
+        <Field Name="Type">
+          <UInt32 />
+        </Field>
+
+        <Field Name="Level">
+          <Int32 />
+        </Field>
+
+        <Field Name="Attributes">
+          <Array Length="8">
+            <Int32 />
+          </Array>
+        </Field>
+
+        <Field Name="DerivedAttributes">
+          <Array Length="3">
+            <Int32 />
+          </Array>
+        </Field>
+
+        <Field Name="Soul">
+          <Int32 />
+        </Field>
+
+        <Field Name="Specializations">
+          <Array Length="3">
+            <Int32 />
+          </Array>
+        </Field>
+
+        <Field Name="Attacks">
+          <Array Length="3">
+            <StructRef Name="MorrowindCreatureAttack" />
+          </Array>
+        </Field>
+
+        <Field Name="Gold">
+          <Int32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FLAG" Presence="Required">
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="XSCL" Presence="Optional">
+        <Field Name="Scale">
+          <Float />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Items" Leader="NPCO">
+        <Subrecord FourCC="NPCO" Presence="Required">
+          <Field Name="Count">
+            <Int32 />
+          </Field>
+          <Field Name="Name">
+            <String Length="32" />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+
+      <SubrecordArray Leader="NPCS" Name="RacialSpells">
+        <Subrecord FourCC="NPCS" Presence="Required">
+          <Field Name="Spell">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+
+      <Subrecord FourCC="AIDT" Presence="Optional">
+        <Field Name="AIData">
+          <StructRef Name="MorrowindAIData" />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="AITravelDestinations" Leader="DODT">
+
+        <Subrecord FourCC="DODT" Presence="Required">
+          <Field Name="Position">
+            <StructRef Name="MorrowindPosition" />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="DNAM" Presence="Optional">
+          <Field Name="Cell">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+      
+      <SubrecordArray Name="AIPackages" Leader="AI_T|AI_W|AI_F|AI_E">
+        <Subrecord FourCC="AI_T" Presence="Optional">
+          <Field Name="TravelPackage">
+            <StructRef Name="MorrowindAITravelPackage" />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="AI_W" Presence="Optional">
+          <Field Name="WanderPackage">
+            <StructRef Name="MorrowindAIWanderPackage" />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="AI_F" Presence="Optional">
+          <Field Name="FollowPackage">
+            <StructRef Name="MorrowindAIFollowEscortPackage" />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="AI_E" Presence="Optional">
+          <Field Name="EscortPackage">
+            <StructRef Name="MorrowindAIFollowEscortPackage" />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="CNDT" Presence="Optional">
+          <Field Name="FollowEscortCellName">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="BODY" Name="BodyPart">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="RaceName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="BYDT" Presence="Required">
+        <Field Name="BodyPart">
+          <UInt8 />
+        </Field>
+        <Field Name="PartVampire">
+          <UInt8 />
+        </Field>
+        <Field Name="PartFlags">
+          <UInt8 />
+        </Field>
+        <Field Name="PartType">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="LIGH" Name="Light">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="ItemFriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ITEX" Presence="Optional">
+        <Field Name="ItemIconName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="LHDT" Presence="Required">
+        <Field Name="ItemWeight">
+          <Float />
+        </Field>
+        <Field Name="ItemValue">
+          <Int32 />
+        </Field>
+        <Field Name="ItemTime">
+          <Int32 />
+        </Field>
+        <Field Name="LightRadius">
+          <Int32 />
+        </Field>
+        <Field Name="LightColorABGR">
+          <UInt32 />
+        </Field>
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="SNAM" Presence="Optional">
+        <Field Name="SoundName">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="ENCH" Name="Enchantment">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ENDT" Presence="Required">
+        <Field Name="Type">
+          <UInt32 />
+        </Field>
+        <Field Name="Cost">
+          <UInt32 />
+        </Field>
+        <Field Name="Charge">
+          <UInt32 />
+        </Field>
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+      
+      <SubrecordArray Name="Effects" Leader="ENAM">
+        <Subrecord FourCC="ENAM" Presence="Required">
+          <Field Name="Effect">
+            <StructRef Name="MorrowindSpellEffect" />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="NPC_" Name="NPC">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="MODL" Presence="Optional">
+        <Field Name="AdditionalAnimationFileName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Required">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="RNAM" Presence="Required">
+        <Field Name="RaceName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="CNAM" Presence="Required">
+        <Field Name="ClassName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ANAM" Presence="Optional">
+        <Field Name="FactionName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="BNAM" Presence="Required">
+        <Field Name="HeadName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="KNAM" Presence="Required">
+        <Field Name="HairName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="NPDT" Presence="Required">
+        <Field Name="Level">
+          <UInt32 />
+        </Field>
+        
+        <!-- two types of NPDT exist! -->
+      </Subrecord>
+      
+      <Subrecord FourCC="FLAG" Presence="Required">
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Items" Leader="NPCO">
+        <Subrecord FourCC="NPCO" Presence="Required">
+          <Field Name="Count">
+            <Int32 />
+          </Field>
+          <Field Name="Name">
+            <String Length="32" />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+
+      <SubrecordArray Name="Spells" Leader="NPCS">
+        <Subrecord FourCC="NPCS" Presence="Required">
+          <Field Name="SpellName">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+      
+      <Subrecord FourCC="XSCL" Presence="Optional">
+        <Field Name="Scale">
+          <Float />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="AIDT" Presence="Optional">
+        <Field Name="AIData">
+          <StructRef Name="MorrowindAIData" />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="AITravelDestinations" Leader="DODT">
+
+        <Subrecord FourCC="DODT" Presence="Required">
+          <Field Name="Position">
+            <StructRef Name="MorrowindPosition" />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="DNAM" Presence="Optional">
+          <Field Name="Cell">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+
+      <SubrecordArray Name="AIPackages" Leader="AI_T|AI_W|AI_F|AI_E">
+        <Subrecord FourCC="AI_T" Presence="Optional">
+          <Field Name="TravelPackage">
+            <StructRef Name="MorrowindAITravelPackage" />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="AI_W" Presence="Optional">
+          <Field Name="WanderPackage">
+            <StructRef Name="MorrowindAIWanderPackage" />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="AI_F" Presence="Optional">
+          <Field Name="FollowPackage">
+            <StructRef Name="MorrowindAIFollowEscortPackage" />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="AI_E" Presence="Optional">
+          <Field Name="EscortPackage">
+            <StructRef Name="MorrowindAIFollowEscortPackage" />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="CNDT" Presence="Optional">
+          <Field Name="FollowEscortCellName">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="ARMO" Name="Armor">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="AODT" Presence="Required">
+        <Field Name="Type">
+          <UInt32 />
+        </Field>
+
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+
+        <Field Name="Health">
+          <UInt32 />
+        </Field>
+
+        <Field Name="EnchantPoints">
+          <UInt32 />
+        </Field>
+
+        <Field Name="Armor">
+          <UInt32 />
+        </Field>
+
+      </Subrecord>
+      
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="BodyParts" Leader="INDX">
+        <Subrecord FourCC="INDX" Presence="Required">
+          <Field Name="Index">
+            <UInt8 />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="BNAM" Presence="Optional">
+          <Field Name="MalePart">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="CNAM" Presence="Optional">
+          <Field Name="FemalePart">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+      
+      <Subrecord FourCC="ENAM" Presence="Optional">
+        <Field Name="EnchantmentName">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="CLOT" Name="Clothing">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="CTDT" Presence="Required">
+        <Field Name="Type">
+          <UInt32 />
+        </Field>
+
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <UInt16 />
+        </Field>
+
+        <Field Name="EnchantPoints">
+          <UInt16 />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ITEX" Presence="Optional">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="BodyParts" Leader="INDX">
+        <Subrecord FourCC="INDX" Presence="Required">
+          <Field Name="Index">
+            <UInt8 />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="BNAM" Presence="Optional">
+          <Field Name="MalePart">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="CNAM" Presence="Optional">
+          <Field Name="FemalePart">
+            <String />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+      
+      <Subrecord FourCC="ENAM" Presence="Optional">
+        <Field Name="EnchantmentName">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="REPA" Name="RepairItem">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="RIDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+
+        <Field Name="Uses">
+          <UInt32 />
+        </Field>
+
+        <Field Name="Quality">
+          <Float />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="ACTI" Name="Activator">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="APPA" Name="Apparatus">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="AADT" Presence="Required">
+        <Field Name="Type">
+          <UInt32 />
+        </Field>
+
+        <Field Name="Quality">
+          <Float />
+        </Field>
+
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+    
+    <Record FourCC="LOCK" Name="Lockpick">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="LKDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+        
+        <Field Name="Quality">
+          <Float />
+        </Field>
+
+        <Field Name="Uses">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+    
+    <Record FourCC="PROB" Name="Probe">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="PBDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+
+        <Field Name="Quality">
+          <Float />
+        </Field>
+
+        <Field Name="Uses">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="INGR" Name="Ingredient">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="IRDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+
+        <Field Name="Effects">
+          <Array Length="4">
+            <Int32 />
+          </Array>
+        </Field>
+
+        <Field Name="Skills">
+          <Array Length="4">
+            <Int32 />
+          </Array>
+        </Field>
+
+        <Field Name="Attributes">
+          <Array Length="4">
+            <Int32 />
+          </Array>
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+    
+    <Record FourCC="BOOK" Name="Book">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="BKDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+        
+        <Field Name="SkillID">
+          <Int32 />
+        </Field>
+
+        <Field Name="EnchantPoints">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ITEX" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="TEXT" Presence="Required">
+        <Field Name="BookText">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="ENAM" Presence="Optional">
+        <Field Name="Enchantment">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+    
+    <Record FourCC="ALCH" Name="Alchemy">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="MODL" Presence="Required">
+        <Field Name="ModelName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="TEXT" Presence="Required">
+        <Field Name="ItemIcon">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FriendlyName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="SCRI" Presence="Optional">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ALDT" Presence="Required">
+        <Field Name="Weight">
+          <Float />
+        </Field>
+
+        <Field Name="Value">
+          <Int32 />
+        </Field>
+
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>        
+      </Subrecord>
+    
+      <SubrecordArray Name="Effects" Leader="ENAM">
+        <Subrecord FourCC="ENAM" Presence="Required">
+          <Field Name="Effect">
+            <StructRef Name="MorrowindSpellEffect" />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="LEVI" Name="LeveledItem">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="NNAM" Presence="Required">
+        <Field Name="ChanceNone">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="INDX" Presence="Required">
+        <Field Name="NumberOfItems">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Items" Leader="INAM">
+        <Subrecord FourCC="INAM" Presence="Required">
+          <Field Name="ItemName">
+            <String />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="INTV" Presence="Required">
+          <Field Name="ItemLevel">
+            <UInt8 />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+    
+    <Record FourCC="LEVC" Name="LeveledCreature">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="NNAM" Presence="Required">
+        <Field Name="ChanceNone">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="INDX" Presence="Required">
+        <Field Name="NumberOfItems">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <SubrecordArray Name="Items" Leader="CNAM">
+        <Subrecord FourCC="CNAM" Presence="Required">
+          <Field Name="CreatureName">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="INTV" Presence="Required">
+          <Field Name="CreatureLevel">
+            <UInt8 />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="CELL" Name="Cell">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String/>
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Flags">
+          <UInt32 />
+        </Field>
+        <Field Name="CellX">
+          <Int32 />
+        </Field>
+        <Field Name="CellY">
+          <Int32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="RGNN" Presence="Optional">
+        <Field Name="RegionName">
+          <String/>
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="NAM5" Presence="Optional">
+        <Field Name="MapColor">
+          <UInt32/>
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="INTV" Presence="Optional">
+        <!-- unknown -->
+      </Subrecord>
+      
+      <Subrecord FourCC="WHGT" Presence="Optional">
+        <Field Name="WaterHeight">
+          <Float/>
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="AMBI" Presence="Optional">
+        <Field Name="AmbientColor">
+          <UInt32/>
+        </Field>
+        <Field Name="SunlightColor">
+          <UInt32/>
+        </Field>
+        <Field Name="FogColor">
+          <UInt32/>
+        </Field>
+        <Field Name="FogDensity">
+          <Float/>
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="NAM0" Presence="Optional">
+        <Field Name="NumberOfRefs">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+      
+      <SubrecordArray Name="References" Leader="FRMR">
+        <Subrecord FourCC="FRMR" Presence="Required">
+          <Field Name="ReferenceId">
+            <UInt32 />
+          </Field>
+        </Subrecord>
+        <Subrecord FourCC="NAME" Presence="Required">
+          <Field Name="Name">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="UNAM" Presence="Optional">
+          <Field Name="Blocked">
+            <UInt8 />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="XSCL" Presence="Optional">
+          <Field Name="Scale">
+            <Float />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="CNAM" Presence="Optional">
+          <Field Name="FactionName">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="INDX" Presence="Optional">
+          <Field Name="FactionRank">
+            <Int32 />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="ANAM" Presence="Optional">
+          <Field Name="OwnerName">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="XSOL" Presence="Optional">
+          <Field Name="SoulCreature">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="BNAM" Presence="Optional">
+          <Field Name="GlobalVariableOrRankID">
+            <String />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="XCHG" Presence="Optional">
+          <Field Name="Charge">
+            <Float />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="INTV" Presence="Optional">
+          <Field Name="Health">
+            <Int32 />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="NAM9" Presence="Optional">
+          <Field Name="Value">
+            <Int32 />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="DODT" Presence="Optional">
+          <Field Name="DoorTarget">
+            <StructRef Name="MorrowindPosition" />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="DNAM" Presence="Optional">
+          <Field Name="DoorExitName">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="FLTV" Presence="Optional">
+          <Field Name="DoorLockLevel">
+            <Int32 />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="KNAM" Presence="Optional">
+          <Field Name="DoorKey">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="TNAM" Presence="Optional">
+          <Field Name="DoorTrapName">
+            <String />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="FLTV" Presence="Optional">
+          <Field Name="UnknownSecondFLTV">
+            <Int32 />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="DATA" Presence="Optional">
+          <Field Name="Position">
+            <StructRef Name="MorrowindPosition" />
+          </Field>
+        </Subrecord>
+
+        <Subrecord FourCC="NAM0" Presence="Optional">
+          <!-- unknown -->
+        </Subrecord>
+
+      </SubrecordArray>
+    </Record>
+
+    <Record FourCC="LAND" Name="Landscape">
+      <Subrecord FourCC="INTV" Presence="Required">
+        <Field Name="CellX">
+          <Int32 />
+        </Field>
+        <Field Name="CellY">
+          <Int32 />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Unknown">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="VNML" Presence="Optional">
+        <Field Name="Normals">
+          <ByteArray Length="12675" />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="VHGT" Presence="Optional">
+        <Field Name="BaseHeight">
+          <Float />
+        </Field>
+        <Field Name="HeightDifferences">
+          <ByteArray Length="4225" />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="WNAM" Presence="Optional">
+        <Field Name="MinimapColors">
+          <ByteArray Length="81" />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="VCLR" Presence="Optional">
+        <Field Name="VertexColors">
+          <ByteArray Length="12675" />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="VTEX" Presence="Optional">
+        <Field Name="TextureSelection">
+          <Array Length="256">
+            <UInt16 />
+          </Array>
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Struct Name="MorrowindPathGridPoint">
+      <Field Name="X">
+        <Float />
+      </Field>
+      <Field Name="Y">
+        <Float />
+      </Field>
+      <Field Name="Z">
+        <Float />
+      </Field>
+      <Field Name="Flags">
+        <UInt32 />
+      </Field>
+    </Struct>
+
+    <Record FourCC="PGRD" Name="PathGrid">
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="CellX">
+          <Int32 />
+        </Field>
+        <Field Name="CellY">
+          <Int32 />
+        </Field>
+        <Field Name="Unknown1">
+          <UInt16 />
+        </Field>
+        <Field Name="Unknown2">
+          <!-- Possibly total number of points -->
+          <UInt16 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="CellName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="PGRP" Presence="Required">
+        <Field Name="Points">
+          <Array>
+            <StructRef Name="MorrowindPathGridPoint" />
+          </Array>
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="PGRC" Presence="Required">
+        <Field Name="Links">
+          <Array>
+            <UInt32 />
+          </Array>
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="SNDG" Name="SoundGenerator">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Type">
+          <UInt32 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="CNAM" Presence="Optional">
+        <Field Name="CreatureName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="SNAM" Presence="Required">
+        <Field Name="SoundName">
+          <String />
+        </Field>
+      </Subrecord>
+
+    </Record>
+
+    <Record FourCC="DIAL" Name="DialogueTopic">
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Type">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+    </Record>
+    
+    <Record FourCC="INFO" Name="DialogueResponse">
+      <Subrecord FourCC="INAM" Presence="Required">
+        <Field Name="ID">
+          <String />
+        </Field>
+      </Subrecord>
+      <Subrecord FourCC="PNAM" Presence="Required">
+        <Field Name="PreviousID">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="NNAM" Presence="Required">
+        <Field Name="NextID">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Type">
+          <UInt32 />
+        </Field>
+        <Field Name="Disposition">
+          <UInt32 />
+        </Field>
+        <Field Name="Rank">
+          <UInt8 />
+        </Field>
+        <Field Name="Gender">
+          <UInt8 />
+        </Field>
+        <Field Name="PCRank">
+          <UInt8 />
+        </Field>
+        <Field Name="Unknown1">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+
+      <Subrecord FourCC="ONAM" Presence="Optional">
+        <Field Name="ActorName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="RNAM" Presence="Optional">
+        <Field Name="RaceName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="CNAM" Presence="Optional">
+        <Field Name="ClassName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="FNAM" Presence="Optional">
+        <Field Name="FactionName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="ANAM" Presence="Optional">
+        <Field Name="CellName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="DNAM" Presence="Optional">
+        <Field Name="PCFactionName">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="SNAM" Presence="Optional">
+        <Field Name="SoundFilename">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="NAME" Presence="Optional">
+        <Field Name="Response">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="QSTN" Presence="Optional">
+        <Field Name="JournalName">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="QSTF" Presence="Optional">
+        <Field Name="JournalFinished">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="QSTR" Presence="Optional">
+        <Field Name="JournalRestart">
+          <UInt8 />
+        </Field>
+      </Subrecord>
+      
+      <SubrecordArray Name="Scripts" Leader="SCVR">
+        <Subrecord FourCC="SCVR" Presence="Required">
+          <Field Name="LocalVariables">
+            <String />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="INTV" Presence="Optional">
+          <Field Name="Unknown2">
+            <UInt32 />
+          </Field>
+        </Subrecord>
+        
+        <Subrecord FourCC="FLTV" Presence="Optional">
+          <Field Name="Result">
+            <Float />
+          </Field>
+        </Subrecord>
+      </SubrecordArray>
+
+
+      <Subrecord FourCC="BNAM" Presence="Optional">
+        <Field Name="ResultScript">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+
+    <Record FourCC="SSCR" Name="StartupScript">
+      <Subrecord FourCC="DATA" Presence="Required">
+        <Field Name="Name">
+          <String />
+        </Field>
+      </Subrecord>
+      
+      <Subrecord FourCC="NAME" Presence="Required">
+        <Field Name="ScriptName">
+          <String />
+        </Field>
+      </Subrecord>
+    </Record>
+  </Types>
+</Layout>
