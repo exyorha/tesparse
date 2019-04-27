@@ -287,7 +287,7 @@ namespace tesparse {
 		{
 			int32_t val;
 			stream >> val;
-			return static_cast<TESUInt>(val);
+			return static_cast<TESInt>(val);
 		}
 
 		case FieldType::Float:

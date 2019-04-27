@@ -189,7 +189,7 @@ namespace tesparse {
 			{ L"FourCC", FieldType::FourCC },
 			{ L"UInt8", FieldType::UInt8 },
 			{ L"UInt16", FieldType::UInt16 },
-			{ L"Int32", FieldType::UInt32 },
+			{ L"Int32", FieldType::Int32 },
 			{ L"UInt32", FieldType::UInt32 },
 			{ L"Float", FieldType::Float },
 			{ L"ByteArray", FieldType::ByteArray },
