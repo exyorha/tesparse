@@ -1,5 +1,7 @@
 #include <tesparse/OutputSerializationStream.h>
 
+#include <stdexcept>
+
 namespace tesparse {
 	OutputSerializationStream::OutputSerializationStream() : m_targetStream(nullptr), m_position(0), m_offset(0) {
 

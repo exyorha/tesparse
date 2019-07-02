@@ -21,6 +21,7 @@ _COM_SMARTPTR_TYPEDEF(IXmlReader, IID_IXmlReader);
 namespace tesparse {
 	enum class FieldType {
 		FourCC,
+		Int8,
 		UInt8,
 		UInt16,
 		Int32,

@@ -19,15 +19,16 @@
     Name CDATA #REQUIRED
 >
 
-<!ELEMENT Field (FourCC|UInt8|UInt16|Int32|UInt32|Float|ByteArray|String|Array|StructRef)>
+<!ELEMENT Field (FourCC|Int8|UInt8|UInt16|Int32|UInt32|Float|ByteArray|String|Array|StructRef)>
 <!ATTLIST Field
   Name CDATA #REQUIRED>
 
-<!ELEMENT Array (FourCC|UInt8|UInt16|Int32|UInt32|Float|ByteArray|String|Array|StructRef)>
+<!ELEMENT Array (FourCC|Int8|UInt8|UInt16|Int32|UInt32|Float|ByteArray|String|Array|StructRef)>
 <!ATTLIST Array
    Length CDATA #IMPLIED>
 
 <!ELEMENT FourCC EMPTY>
+<!ELEMENT Int8 EMPTY>
 <!ELEMENT UInt8 EMPTY>
 <!ELEMENT UInt16 EMPTY>
 <!ELEMENT Int32 EMPTY>

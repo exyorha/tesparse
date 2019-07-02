@@ -5,6 +5,7 @@
 
 #include <type_traits>
 #include <vector>
+#include <string>
 
 namespace tesparse {
 	class SerializationStream {

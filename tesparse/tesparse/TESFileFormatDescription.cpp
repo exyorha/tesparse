@@ -187,6 +187,7 @@ namespace tesparse {
 	void TESFileFormatDescription::parseField(const IXmlReaderPtr &reader, FieldDefinition &field) {
 		static const std::unordered_map<std::wstring_view, FieldType> fieldTypeMap{
 			{ L"FourCC", FieldType::FourCC },
+			{ L"Int8", FieldType::Int8 },
 			{ L"UInt8", FieldType::UInt8 },
 			{ L"UInt16", FieldType::UInt16 },
 			{ L"Int32", FieldType::Int32 },

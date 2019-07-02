@@ -2316,7 +2316,9 @@
           <Float />
         </Field>
         <Field Name="HeightDifferences">
-          <ByteArray Length="4225" />
+          <Array Length="4225">
+            <Int8 />
+          </Array>
         </Field>
       </Subrecord>
       <Subrecord FourCC="WNAM" Presence="Optional">

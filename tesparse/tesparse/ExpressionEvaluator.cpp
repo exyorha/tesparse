@@ -1,6 +1,8 @@
 #include <tesparse/ExpressionEvaluator.h>
 #include <tesparse/TESValue.h>
 
+#include <stdexcept>
+
 namespace tesparse {
 	ExpressionEvaluator::ExpressionEvaluator() = default;
 

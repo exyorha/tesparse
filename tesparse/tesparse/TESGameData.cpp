@@ -268,7 +268,14 @@ namespace tesparse {
 			stream >> val;
 			return static_cast<TESUInt>(val);
 		}	
-		
+
+		case FieldType::Int8:
+		{
+			int8_t val;
+			stream >> val;
+			return static_cast<TESInt>(val);
+		}
+
 		case FieldType::UInt8:
 		{
 			uint8_t val;
