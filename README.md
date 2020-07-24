@@ -23,3 +23,7 @@ means.
 # Licensing
 
 tesparse is licensed under the terms of the MIT license (see LICENSE).
+
+Please note that tesparse-cli (but not tesparse itself) also includes copies
+of CLI11 by Henry Schreiner and nlohmann-json by Niels Lohmann, released under
+their own licenses. Please review relevant files for more details.
